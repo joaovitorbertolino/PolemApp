@@ -57,7 +57,7 @@
             var telefonepessoal = response.telefonepessoal;
             var telefonerecado = response.telefonerecado;
             var imagem = response.img;
-            var route = "http://192.168.1.83/polem-web/imagens/"
+            var route = "https://polemapp.000webhostapp.com/imagens"
             document.getElementById("nome").value = nome;
             document.getElementById("cpf").value = cpf;
             document.getElementById("nascimento").value = nascimento;
@@ -67,7 +67,7 @@
             document.getElementById("foto").src = route + imagem;
         }
     };
-    xhr.open("GET", "http://192.168.1.83/polem-web/localizaid.php?id=" + id, true);
+    xhr.open("GET", "https://polemapp.000webhostapp.com/localizaid.php?id=" + id, true);
     xhr.send();
 }
         window.onload = preencherDados();

@@ -16,7 +16,7 @@
 
             <img src="/www/img/logo.png">
             <br>
-            <form method="POST" action="http://192.168.1.83/polem-web/autenticalogin.php" id="login" name="login">
+            <form method="POST" action="https://polemapp.000webhostapp.com/autenticalogin.php" id="login" name="login">
                 <input type="text" placeholder="usuario" class="inputForm" name="username" id="username">
                 <br>
                 <input type="password" placeholder="senha" class="inputForm" name="password" id="password">
@@ -49,7 +49,7 @@
             formData.append("password", senha);
             
             // Envia uma solicitação POST para o PHP
-            fetch("http://192.168.1.83/polem-web/autenticalogin.php", {
+            fetch("https://polemapp.000webhostapp.com/autenticalogin.php", {
                 method: "POST",
                 body: formData
             })
