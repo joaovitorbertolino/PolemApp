@@ -55,7 +55,7 @@
                     document.getElementById("horariofinal").value = horariofinal;
                 }
             };
-            xhr.open("GET", "http://192.168.1.83/polem-web/localizaid.php?id=" + id, true);
+            xhr.open("GET", "https://polemapp.000webhostapp.com/localizaid.php?id=" + id, true);
             xhr.send();
         }
         window.onload = preencherDados;

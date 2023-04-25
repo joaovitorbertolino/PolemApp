@@ -47,3 +47,11 @@ button {
     border-radius: 7px;
 
 }
+#versao {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }

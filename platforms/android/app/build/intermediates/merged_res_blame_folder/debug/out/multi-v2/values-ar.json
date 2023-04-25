@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\joaov\\polem\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ar\\values-ar.xml",
+            "outputFile": "C:\\Users\\joaov\\PolemApp\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ar\\values-ar.xml",
             "map": [
                 {
                     "source": "C:\\Users\\joaov\\.gradle\\caches\\transforms-3\\09314801a92bc2d84a1fe4a156efb7a9\\transformed\\core-1.5.0\\res\\values-ar\\values-ar.xml",
