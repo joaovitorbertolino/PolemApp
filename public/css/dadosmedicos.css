@@ -86,7 +86,7 @@ div>p {
     height: 60px;
     
     top: 85px;
-    margin-top: calc(-10vh + 80px);
+    margin-top: 1vh;
     margin-left: calc(50% - 10.5vh)
 }
 

@@ -23,10 +23,8 @@
         <input type="text" id="cuidadortelefone">
         <p>Parentesco</p>
         <input type="text" id="parentesco">
-        <p>horario inicial</p>
-        <input type="text" id="horarioinicial">
-        <p>horario final</p>
-        <input type="text" id="horariofinal">
+        <p>Turno3</p>
+        <input type="text" id="turno3">
     </div>
     <script>
          function getCookie(name) {
@@ -45,14 +43,12 @@
                     var cuidadorname = response.cuidadornome3;
                     var cuidadortelefone = response.telefone3;
                     var parentesco = response.parentesco3;
-                    var horarioinicial = response.horarioinicial3;
-                    var horariofinal = response.horariofinal3;
+                    var turno3 = response.turno3;
 
                     document.getElementById("cuidadornome").value = cuidadorname;
                     document.getElementById("cuidadortelefone").value = cuidadortelefone;
                     document.getElementById("parentesco").value = parentesco;
-                    document.getElementById("horarioinicial").value = horarioinicial;
-                    document.getElementById("horariofinal").value = horariofinal;
+                    document.getElementById("turno3").value = turno3;
                 }
             };
             xhr.open("GET", "https://polemapp.000webhostapp.com/localizaid.php?id=" + id, true);

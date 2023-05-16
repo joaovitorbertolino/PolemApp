@@ -25,17 +25,18 @@ p {
 div {
     overflow-y: scroll;
 }
-#h1-2 {
+#texto {
     color: #AC6802;
     font-size: 36px;
     margin-left: 8px;
 }
 
-#h1 {
+#titulo {
     text-align: center;
     margin-right: auto;
-    margin-top: -2vh;
-    margin-left: auto;
+    margin-top: -6.5vh;
+    margin-left: 25vw;
+    position: absolute;
 }
 
 #seta {

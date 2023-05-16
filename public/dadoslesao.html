@@ -53,7 +53,12 @@
                     document.getElementById("fratura").value = fratura;
                     document.getElementById("medular").value = medular;
                     document.getElementById("asia").value = asia;
-                    document.getElementById("traumatico").value = traumatico;
+                    if (traumatico == 1) {
+                        document.getElementById("traumatico").value = "Traumatico";
+                    }
+                    else{
+                        document.getElementById("traumatico").value = "Não Traumatico";
+                    }
                     document.getElementById("patologia").value = patologia;
                     document.getElementById("frankell").value = frankell;
                 }

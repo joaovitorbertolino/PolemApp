@@ -15,9 +15,37 @@
 </header>
 
 <body>
-    <div>
-        <p>Necessidades</p>
-        <input type="text" id="necessidades">
+    <div class="container" id="containernecessidades1">
+        <p>Necessidade 1</p>
+        <input type="text" id="necessidades1">
+    </div>
+    <div class="container" id="containernecessidades2">
+        <p>Necessidade 2</p>
+        <input type="text" id="necessidades2">
+    </div>
+    <div class="container" id="containernecessidades3">
+        <p>Necessidade 3</p>
+        <input type="text" id="necessidades3">
+    </div>
+    <div class="container" id="containernecessidades4">
+        <p>Necessidade 4</p>
+        <input type="text" id="necessidades4">
+    </div>
+    <div class="container" id="containernecessidades5">
+        <p>Necessidade 5</p>
+        <input type="text" id="necessidades5">
+    </div>
+    <div class="container" id="containernecessidades6">
+        <p>Necessidade 6</p>
+        <input type="text" id="necessidades6">
+    </div>
+    <div class="container" id="containernecessidades7">
+        <p>Necessidade 7</p>
+        <input type="text" id="necessidades7">
+    </div>
+    <div class="container" id="containernecessidades8">
+        <p>Necessidade 8</p>
+        <input type="text" id="necessidaes8">
     </div>
     <script>
         function getCookie(name) {
@@ -33,9 +61,63 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
-                    var necessidades = response.necessidades;
+                    var necessidades1 = response.necessidades1;
+                    var necessidades2 = response.necessidades2;
+                    var necessidades3 = response.necessidades3;
+                    var necessidades4 = response.necessidades4;
+                    var necessidades5 = response.necessidades5;
+                    var necessidades6 = response.necessidades6;
+                    var necessidades7 = response.necessidades7;
+                    var necessidades8 = response.necessidades8;
 
-                    document.getElementById("necessidades").value = necessidades;
+                    if (necessidades1 !== '') {
+                            document.getElementById("necessidades1").value = necessidades1;
+                        }
+                    else{
+                            document.getElementById("containernecessidades1").style.display = 'none';
+                        }
+                    if (necessidades2 !== '') {
+                            document.getElementById("necessidades2").value = necessidades2;
+                        }
+                    else{
+                            document.getElementById("containernecessidades2").style.display = 'none';
+                        }
+                    if (necessidades3 !== '') {
+                            document.getElementById("necessidades3").value = necessidades3;
+                        }
+                     else{
+                            document.getElementById("containernecessidades3").style.display = 'none';
+                        }
+                    if (necessidades4 !== '') {
+                            document.getElementById("necessidades4").value = necessidades4;
+                        }
+                     else{
+                            document.getElementById("containernecessidades4").style.display = 'none';
+                        }
+                    if (necessidades5 !== '') {
+                            document.getElementById("necessidades5").value = necessidades5;
+                        }
+                     else{
+                            document.getElementById("containernecessidades5").style.display = 'none';
+                        }
+                    if (necessidades6 !== '') {
+                            document.getElementById("necessidades6").value = necessidades6;
+                        }
+                     else{
+                            document.getElementById("containernecessidades6").style.display = 'none';
+                        }
+                    if (necessidades7 !== '') {
+                            document.getElementById("necessidades7").value = necessidades7;
+                        }
+                     else{
+                            document.getElementById("containernecessidades7").style.display = 'none';
+                        }
+                    if (necessidades8 !== '') {
+                            document.getElementById("necessidades8").value = necessidades8;
+                        }
+                     else{
+                            document.getElementById("containernecessidades8").style.display = 'none';
+                        }
                 }
             };
             xhr.open("GET", "https://polemapp.000webhostapp.com/localizaid.php?id=" + id, true);
