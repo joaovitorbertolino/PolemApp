@@ -66,3 +66,8 @@ div>h1 {
 
 
 }
+@media (min-width: 768px) {
+    .dados {
+        max-width: 250px;
+    }
+}

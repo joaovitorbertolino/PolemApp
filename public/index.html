@@ -16,53 +16,77 @@
 
             <img src="./img/logo.png">
             <br>
-            <form method="POST" action="https://polemapp.000webhostapp.com/autenticalogin.php" id="login" name="login">
+            <form method="POST" id="loginForm">
                 <input type="text" placeholder="usuario" class="inputForm" name="username" id="username">
                 <br>
                 <input type="password" placeholder="senha" class="inputForm" name="password" id="password">
                 <br>
-                <button type="submit" onclick="enviarDados(event)">Confirmar</button>
+                <button type="submit">Confirmar</button>
 
             </form>
         </div>
 
     </div>
 
-    <script src="cordova.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="js/index.js"></script>
     <script>
-        function enviarDados(event) {
-            event.preventDefault();
-            // Obtém os valores dos campos de entrada
-            const usuario = document.getElementById("username").value;
-            const senha = document.getElementById("password").value;
+      const firebaseConfig = {
+        apiKey: "AIzaSyAQd-7j39OAs1QLlp0sWR2m4Q7kqrnEUeM",
+        authDomain: "polemcadastro.firebaseapp.com",
+        databaseURL: "https://polemcadastro-default-rtdb.firebaseio.com",
+        projectId: "polemcadastro",
+        storageBucket: "polemcadastro.appspot.com",
+        messagingSenderId: "870994442762",
+        appId: "1:870994442762:web:43a83d2cbda78bb254bdf3",
+        measurementId: "G-XW9LVSYCC7"
+      };
+    
+      // Inicialize o Firebase
+      firebase.initializeApp(firebaseConfig);
+    
+      // Inicialize o Cloud Firestore e obtenha uma referência para o serviço
+      const db = firebase.firestore();
+
+      const loginForm = document.getElementById("loginForm");
+      loginForm.addEventListener("submit", (event) => {
+        event.preventDefault(); // Evita o envio padrão do formulário
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        console.log("Username:", username);
+        console.log("Password:", password);
+
+        const usersCollection = db.collection("user");
+
+        usersCollection.where("username", "==", username).get()
+          .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+              //alert("Não deixe os campos em branco")
+              return;
+            }
             
-            // Cria um objeto FormData para enviar os dados para o PHP
-            const formData = new FormData();
-            formData.append("username", usuario);
-            formData.append("password", senha);
-            
-            // Envia uma solicitação POST para o PHP
-            fetch("https://polemapp.000webhostapp.com/autenticalogin.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Se a validação for bem sucedida, redireciona para a homepage
-                if (data.validacao) {
-                    window.location.href = "https://polemweb.web.app/homepage.html"
-                    const id = data.user_id
-                    document.cookie = "user_id=" + id;
-                } else {
-                    alert("Usuário ou senha inválidos.");
-                }
-            })
-            .catch(error => {
-                console.error(error);
+            querySnapshot.forEach((doc) => {
+              const userData = doc.data();
+              console.log("Senha do Firestore:", userData.webpassword);
+              if (userData.password === password) {
+                console.log("Senha correta");
+                window.location.href = "https://polemweb.web.app/homepage.html";
+                const id = userData.username;
+                document.cookie = "username=" + id;
+              } else {
+                console.log("Senha incorreta");
+                alert("Usuario e/ou senha incorreta")
+              }
             });
-        }
+          })
+          .catch((error) => {
+            console.log("Erro ao obter dados:", error);
+          });
+      });
     </script>
 </body>
-<h4 id="versao"> Polem Id V1.0.0</h4>
+<footer id="versao">Polem Id V1.0.1</footer>
 </html>

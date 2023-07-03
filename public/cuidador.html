@@ -18,44 +18,89 @@
 <body>
     <div>
         <p>Clique em cima de cada um para mais informações</p>
-        <p>Cuidador 1</p>
-        <input type="text" onclick="window.location.href='./cuidador1.html'" id="cuidador1">
-        <p>Cuidador 2</p>
-        <input type="text" onclick="window.location.href='./cuidador2.html'" id="cuidador2">
-        <p>Cuidador 3</p>
-        <input type="text" onclick="window.location.href='./cuidador3.html'" id="cuidador3">
-        <p>Cuidador 4</p>
-        <input type="text" onclick="window.location.href='./cuidador4.html'" id="cuidador4">
-    </div>
-    <script>
-        function getCookie(name) {
-        var value = "; " + document.cookie;
-        var parts = value.split("; " + name + "=");
-        if (parts.length == 2) {
-            return parts.pop().split(";").shift();
-        }
-    }
-            function preencherDados() {
-            var id = getCookie("user_id");
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var cuidadornome = response.cuidadornome;
-                    var cuidadornome2 = response.cuidadornome2;
-                    var cuidadornome3 = response.cuidadornome3;
-                    var cuidadornome4 = response.cuidadornome4;
 
-                    document.getElementById("cuidador1").value = cuidadornome;
-                    document.getElementById("cuidador2").value = cuidadornome2;
-                    document.getElementById("cuidador3").value = cuidadornome3;
-                    document.getElementById("cuidador4").value = cuidadornome4;
+        <p id="cuidadornome1">Cuidador 1</p>
+        <input type="text" onclick="window.location.href='./cuidador1.html'" id="cuidador1">
+
+
+        <p id="cuidadornome2">Cuidador 2</p>
+        <input type="text" onclick="window.location.href='./cuidador2.html'" id="cuidador2">
+
+        <p id="cuidadornome3">Cuidador 3</p>
+        <input type="text" onclick="window.location.href='./cuidador3.html'" id="cuidador3">
+
+
+        <p id="cuidadornome4">Cuidador 4</p>
+        <input type="text" onclick="window.location.href='./cuidador4.html'" id="cuidador4">
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+        var cookieValue = document.cookie
+        .split("; ")
+        .find(row => row.startsWith("username="))
+        .split("=")[1];
+        console.log("Valor do cookie 'username':", cookieValue);
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyAQd-7j39OAs1QLlp0sWR2m4Q7kqrnEUeM",
+        authDomain: "polemcadastro.firebaseapp.com",
+        databaseURL: "https://polemcadastro-default-rtdb.firebaseio.com",
+        projectId: "polemcadastro",
+        storageBucket: "polemcadastro.appspot.com",
+        messagingSenderId: "870994442762",
+        appId: "1:870994442762:web:43a83d2cbda78bb254bdf3",
+        measurementId: "G-XW9LVSYCC7"
+      };
+    
+      // Inicialize o Firebase
+      firebase.initializeApp(firebaseConfig);
+    
+      // Inicialize o Cloud Firestore e obtenha uma referência para o serviço
+      const db = firebase.firestore();
+      var userCollection = db.collection("user")
+      db.collection("user").where("username", "==", cookieValue)
+      .get()
+      .then((querySnapshot) =>{
+            querySnapshot.forEach((doc) => {
+                const userData = doc.data()
+                const cuidadornome = userData.cuidadornome
+                const cuidadornome2 = userData.cuidadornome2
+                const cuidadornome3 = userData.cuidadornome3
+                const cuidadornome4 = userData.cuidadornome4
+                
+                if (cuidadornome == "") {
+                    var inputElement1 = document.getElementById("cuidador1");
+                    inputElement1.style.display = "none"
+                    document.getElementById("cuidadornome1").style.display ="none"
+                }else{
+                    document.getElementById("cuidador1").value = cuidadornome
                 }
-            };
-            xhr.open("GET", "https://polemapp.000webhostapp.com/localizaid.php?id=" + id, true);
-            xhr.send();
-        }
-        window.onload = preencherDados;
+                if (cuidadornome2 == "") {
+                    var inputElement2 = document.getElementById("cuidador2")
+                    inputElement2.style.display = "none"
+                    document.getElementById("cuidadornome2").style.display ="none"
+                }else{
+                document.getElementById("cuidador2").value = cuidadornome2
+                }
+                if (cuidadornome3 == "") {
+                    var inputElement3 = document.getElementById("cuidador3")
+                    inputElement3.style.display = "none"
+                    document.getElementById("cuidadornome3").style.display ="none"
+                }
+                else{
+                document.getElementById("cuidador3").value = cuidadornome3
+                }
+                if (cuidadornome4 == "") {
+                    var inputElement4 = document.getElementById("cuidador4")
+                    inputElement4.style.display = "none"
+                    document.getElementById("cuidadornome4").style.display ="none"
+                }else{
+                document.getElementById("cuidador4").value = cuidadornome4
+                }
+        })
+        })
         function bloquearInputs() {
             var inputs = document.querySelectorAll("input");
             for (var i = 0; i < inputs.length; i++) {

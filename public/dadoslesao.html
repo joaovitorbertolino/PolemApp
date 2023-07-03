@@ -28,47 +28,58 @@
         <p>Patologia</p>
         <input type="text" id="patologia">
     </div>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script>
-        function getCookie(name) {
-        var value = "; " + document.cookie;
-        var parts = value.split("; " + name + "=");
-        if (parts.length == 2) {
-            return parts.pop().split(";").shift();
-        }
-    }
+        var cookieValue = document.cookie
+        .split("; ")
+        .find(row => row.startsWith("username="))
+        .split("=")[1];
+        console.log("Valor do cookie 'username':", cookieValue);
 
-    function preencherDados() {
-            var id = getCookie("user_id");
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var fratura = response.fratura;
-                    var medular = response.medular;
-                    var asia = response.asia;
-                    var traumatico = response.traumatico;
-                    var patologia = response.patologia;
-                    var frankell = response.frankell;
-
-                    document.getElementById("fratura").value = fratura;
-                    document.getElementById("medular").value = medular;
-                    document.getElementById("asia").value = asia;
-                    if (traumatico == 1) {
-                        document.getElementById("traumatico").value = "Traumatico";
-                    }
-                    else{
-                        document.getElementById("traumatico").value = "Não Traumatico";
-                    }
-                    document.getElementById("patologia").value = patologia;
-                    document.getElementById("frankell").value = frankell;
+        const firebaseConfig = {
+        apiKey: "AIzaSyAQd-7j39OAs1QLlp0sWR2m4Q7kqrnEUeM",
+        authDomain: "polemcadastro.firebaseapp.com",
+        databaseURL: "https://polemcadastro-default-rtdb.firebaseio.com",
+        projectId: "polemcadastro",
+        storageBucket: "polemcadastro.appspot.com",
+        messagingSenderId: "870994442762",
+        appId: "1:870994442762:web:43a83d2cbda78bb254bdf3",
+        measurementId: "G-XW9LVSYCC7"
+      };
+    
+      // Inicialize o Firebase
+      firebase.initializeApp(firebaseConfig);
+    
+      // Inicialize o Cloud Firestore e obtenha uma referência para o serviço
+      const db = firebase.firestore();
+      var userCollection = db.collection("user")
+      db.collection("user").where("username", "==", cookieValue)
+      .get()
+      .then((querySnapshot) =>{
+            querySnapshot.forEach((doc) => {
+                const userData = doc.data()
+                const fratura = userData.fratura
+                const medular = userData.medular
+                const asia = userData.asia
+                const frankell = userData.frankell
+                const traumatico = userData.traumatico
+                const patologia = userData.patologia
+                
+                document.getElementById("fratura").value = fratura
+                document.getElementById("medular").value = medular
+                document.getElementById("asia").value = asia
+                document.getElementById("frankell").value = frankell
+                if (traumatico == true) {
+                    document.getElementById("traumatico").value = "Traumatico"
+                }else{
+                    document.getElementById("traumatico").value = "Não traumatico"
                 }
-            };
-            xhr.open("GET", "https://polemapp.000webhostapp.com/localizaid.php?id=" + id, true);
-            xhr.send();
-        }
-        window.onload = preencherDados;
+                document.getElementById("patologia").value = patologia
+            });
+      })
 
-        function bloquearInputs() {
+      function bloquearInputs() {
             var inputs = document.querySelectorAll("input");
             for (var i = 0; i < inputs.length; i++) {
                 inputs[i].readOnly = true;

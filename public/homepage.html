@@ -43,14 +43,12 @@
         <h1> Necessidades  <br> devido a deficiência</h1><img src="./img/simbolo_2.png">
     </div>
     <script>
-        // Lê o valor do cookie com nome 'user_id'
+        
         const cookieValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('user_id='))
-        .split('=')[1];
-
-        // Usa o valor do cookie
-        console.log(cookieValue);
+        .split("; ")
+        .find(row => row.startsWith("username="))
+        .split("=")[1];
+        console.log("Valor do cookie 'username':", cookieValue);
     </script>
 </body>
 <h4 id="versao"> Polem Id V1.0.0</h4>
